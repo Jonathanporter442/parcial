@@ -1,94 +1,84 @@
 function mostrar()
 {
-var nombre;
-var edad;
-var sexo;
-var estadoCivil;
-var respuesta = "si";
-var edadMasChica=0;
-var edadMasGrande=0;
-var nombreJoven;
-var contMujeresCoV=0;
-var cantMujeres=0;
-var cantHombres=0;
-var acumEdadMujer=0;
-var acumEdadHombre=0;
-var sexoMasGrande;
+	var nombre;
+	var edad;
+	var sexo;
+	var estadoC;
+	var Cmasjoven;
+	var EdadXL;
+	var sexoXL;
+	var edadmin;
+	var contadorCV=0;
+	var acumuladorEdadF=0;
+	var acumuladorEdadM=0;
+	var contadorM=0;
+	var contadorS=0;
+	var promedioEdadF;
+	var promedioEdadM;
+	var respuesta="si";
+
+	do{	nombre=prompt("ingrese el nombre del pasajero");
+		edad=parseInt(prompt("ingrese la edad"))
+		while(isNaN(edad) && edad<18)
+		{
+			edad=parseInt(prompt("reingrese la edad"));
+		}
+		sexo=prompt("ingrese el sexo utilizando F o m").toLowerCase();
+		while(sexo!="f" && sexo!="m" &&!isNaN(sexo))
+		{
+			sexo=prompt("sexo invalido vuelva a ingresarlo").toLowerCase();
+		}
+		estadoC=prompt("ingrese el estado civil('soltero', 'casado' o 'viudo')")
+		while(estadoC!="soltero" && estadoC!="casado" && estadoC!="viudo")
+		{
+			estadoC=prompt("ingrese de nuevo es estado civil");
+		}
+
+		if(sexo=="f")
+		{
+			acumuladorEdadF=acumuladorEdadF+edad
+			contadorM++;
+		}
+
+		if(sexo=="m" && edadmin<edad && estadoC=="casado")
+		{
+		edadmin=edad;
+		Cmasjoven=nombre;
+		}
+
+		if(EdadXL>edad)
+		{
+			EdadXL=nombre;
+			sexoXL=sexoXL;
+
+		}
+
+		if(sexo=="m" && estadoC=="casado" || estadoC=="viudo")
+		{
+			contadorCV++;
+		}
+
+		if(sexo=="m" && estadoC=="soltero")
+		{
+			acumuladorEdadM=acumuladorEdadM+edad;
+			contadorS++;
+
+		}
 
 
-while(respuesta == "si")
-{
-	nombre=prompt("Ingrese su nombre");
- 
-    while(!isNaN(nombre))
-    {
-        nombre = prompt("Error, Ingrese su nombre");
-    }
+		respuesta=prompt("¿Quiere seguir ingresando pasajeros?")
 
-    edad=parseInt(prompt("Ingrese su edad, debe ser mayor a 18"));
+	}while(respuesta=="si");
 
-    while(isNaN(edad) || edad < 18)
-    {
-      edad=parseInt(prompt("No, Ingrese su edad mayor a 18"));
-    }
-  
-	sexo=prompt("Ingrese su sexo: f o m");
-	
-	while(sexo != "f" && sexo != "m")
-	{
-      sexo=prompt("No, Ingrese su sexo f o m");
-    }
-  
- 	estadoCivil=prompt("Ingrese su estado civil: soltero, casado o viudo");
-    
-    while(estadoCivil != "casado" && estadoCivil != "viudo" && estadoCivil != "soltero")
-    {
-      estadoCivil=prompt("No, Ingrese  soltero, casado o viudo");
-	}
+	promedioEdadF=acumuladorEdadF/contadorM;
+	promedioEdadM=acumuladorEdadM/contadorS;
 
+	document.write("El nombre del hombre mas joven que esta casado es : " +Cmasjoven+"</br>");
+	document.write("El sexo de la persona de mayor edad abordo es : " +sexoXL+ " y su nombre es : " +EdadXL+"</br>");
+	document.write("La cantidad de mujere casadas o viudas es : " +contadorCV+"</br>");
+	document.write("El promedio de edad de las mijeres es : " +promedioEdadF+"</br>");
+	document.write("El promedio de los hombres solteros es : " +promedioEdadM);
 
-if(edadMasChica<edad)
-{
- 	edadMasChica = edad;
-}
-if(edadMasGrande>edad)
-{
-	 edadMasGrande = edad;
-	 sexoMasGrande = sexo;
-}
-
-if( estadoCivil == "casado" && edadMasChica && sexo == "m")
-{
-	nombreJoven = nombre;
-}
-
-if(sexo == "f" && estadoCivil == "casadas" || estadoCivil == "viudas")
-{
-	contMujeresCoV++;
-}
-if (sexo == "f")
-{
-	cantMujeres++;
-	acumEdadMujer = acumEdadMujer + edad
-}
-if (sexo == "m")
-{
-	cantHombres++;
-	acumEdadHombre = acumEdadHombre + edad
-}
-
-respuesta=prompt("Desea seguir iterando?");
-
-
-
-}
-
-
-document.write("El nombre del hombre casado más joven: "+nombreJoven+"<br>")
-document.write("El sexo y nombre del pasajero/a más viejo: "+sexoMasGrande+", "+edadMasGrande+"<br>")
-document.write("La cantidad de mujeres que hay casadas o viudas: "+contMujeresCoV+"<br>")
-document.write("El promedio de edad entre las mujeres: "+(acumEdadMujer/cantMujeres)+"<br>")
-document.write("El promedio de edad entre los hombres solteros: "+(acumEdadHombre/cantHombres)+"<br>")
 
 
 
