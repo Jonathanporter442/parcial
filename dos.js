@@ -7,11 +7,12 @@ var preciototal;
 var precioConDescuento;
 var descuento;
 var importeFinal;
-var alimentomax;
+var alimentomax=0;
 var NombreMax;
 var promediopreciototal;
 var acumuladorPrecio=0;
 var contador1=0;
+var flag=0;
 var respuesta="si";
 
 
@@ -19,7 +20,7 @@ var respuesta="si";
 
 		alimento=prompt("Ingrese el alimento que desea llevar(v,a,m)(vegetal,animal,mezcla)").toLowerCase();
 		while(alimento!="v" && alimento!="a" && alimento!="m" 
-				|| alimento!="vegetal" && alimento!="animal" && alimento!="mezcla")
+				|| (alimento!="vegetal" && alimento!="animal" && alimento!="mezcla"))
 
 		{
 			alimento=prompt("Dato invalido, vuelva a ingresarlo").toLowerCase();
@@ -38,25 +39,13 @@ var respuesta="si";
 		preciototal=precioXKilo*peso;
 		acumuladorPrecio=acumuladorPrecio+precioXKilo;
 		contador1++;
-		if(peso=="100")
-		{
-			descuento=preciototal*0.15
-			precioConDescuento=preciototal-descuento
-
-		}
-
-		if(peso=="300")
-		{
-			descuento=preciototal*0.25
-			precioConDescuento=preciototal-descuento
-
-		}
-
-		if(alimentomax>precio)
+		
+		if(alimentomax>precio||flag==0)
 		{
 			alimentomax=precio;
 			NombreMax=alimento;
-		}
+			flag==1;
+		}	
 
 
 
@@ -64,10 +53,25 @@ var respuesta="si";
 respuesta=prompt("quiere seguir ?")
 }while(respuesta=="si");
 
+if(peso=="100")
+		{
+			descuento=preciototal*15/100
+			precioConDescuento=preciototal-descuento
+
+		}
+
+		if(peso=="300")
+		{
+			descuento=preciototal*25/100
+			precioConDescuento=preciototal-descuento
+
+		}
+
+	
 
 
-importeFinal=acumuladorPrecio+importeFinal;
-importeDesuento=acumuladorPrecio-precioConDescuento;
+importeFinal=preciototal+importeFinal;
+importeDesuento=preciototal-precioConDescuento;
 promediopreciototal=acumuladorPrecio/contador1;
 
 
